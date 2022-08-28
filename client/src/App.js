@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Project from './pages/Project';
 import InputAutofocus from './pages/InputAutofocus';
 import CounterContextPage from './pages/CounterContextPage';
+import Zustand from './pages/Zustand';
 import NotFound from './pages/NotFound';
 
 const cache = new InMemoryCache({
@@ -43,6 +44,7 @@ function App() {
               <Route path='/projects/:id' element={<Project />} />
               <Route path='/input-autofocus' element={<InputAutofocus />} />
               <Route path='/counter-context' element={<CounterContextPage />} />
+              <Route path='/zustand' element={<Zustand />} />
               <Route path='*' element={<NotFound />} />
             </Routes>
           </div>
