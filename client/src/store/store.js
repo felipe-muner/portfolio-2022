@@ -1,13 +1,23 @@
 import create from 'zustand'
-import api from '../services/api'
+import API from '../services/api'
 
-export const useStore = create((set) => ({
-  bears: 10,
+export const authStore = create((set) => ({
+  user: {},
+  signIn: () => set(() => ({ user: {login: 'felipe', password: '123'} })),
+  logout: () => set({ user: {login: null, password: null} }),
+}))
+
+export const usersStore = create((set) => ({
   users: [],
-  increasePopulation: () => set((state) => ({ bears: state.bears + 1 })),
-  removeAllBears: () => set({ bears: 0 }),
+  loading: false,
+  hasErrors: false,
   getUsers: async () => {
-    const { data } = await api.get("/users/romulo27")
-    set({ users: data })
+    set(() => ({ loading: true }));
+    try {
+      const response = await API.get("https://jsonplaceholder.typicode.com/users");
+      set(() => ({ users:  response.data, loading: false }));
+    } catch (err) {
+      set(() => ({ hasErrors: true, loading: false }));
+    }
   },
 }))
