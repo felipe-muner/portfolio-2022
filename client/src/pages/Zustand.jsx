@@ -1,24 +1,25 @@
 import { useEffect } from 'react'
 import { usersStore, authStore } from '../store/store'
-import api from "../services/api";
+import API from "../services/api";
 
-function BearCounter() {
-  const user = authStore((state) => state.bears)
-  return <h1>{JSON.stringify(user)} around here ...</h1>
+function AuthDashboard() {
+  const { user, logIn, logOut } = authStore()
+  return <div>
+    <button onClick={logIn}>login</button>
+    <button onClick={logOut}>logout</button>
+    user: {JSON.stringify(user)}
+  </div>
 }
 
-export default function Zustand() {
-  const { users, getUsers, loading } = usersStore((state) => state)
 
-  console.log('useStore((state) => state)', usersStore((state) => state))
-  console.log(users)
-  console.log(loading)
+export default function Zustand() {
+  const { users, getUsers, loading } = usersStore()
 
   return (
     <div>
-      <BearCounter />
-      { loading && 'hahahah'}
+      <AuthDashboard />
       <button onClick={getUsers}> get users</button>
+      {loading && 'loading...'}
       <div>{JSON.stringify(users)}</div>
     </div>
   )

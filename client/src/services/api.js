@@ -1,3 +1,10 @@
-import axios from "axios";
+import "./config"
+import auth from "./auth";
+import user from "./user";
 
-export default axios.create();
+const api = {
+  auth,
+  user,
+};
+
+export default api;

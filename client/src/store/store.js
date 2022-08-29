@@ -1,10 +1,10 @@
 import create from 'zustand'
-import API from '../services/api'
+import api from '../services/api'
 
 export const authStore = create((set) => ({
   user: {},
-  signIn: () => set(() => ({ user: {login: 'felipe', password: '123'} })),
-  logout: () => set({ user: {login: null, password: null} }),
+  logIn: () => set({ user: {login: 'felipe'}}),
+  logOut: () => set({ user: { login: null, password: null } }),
 }))
 
 export const usersStore = create((set) => ({
@@ -14,8 +14,8 @@ export const usersStore = create((set) => ({
   getUsers: async () => {
     set(() => ({ loading: true }));
     try {
-      const response = await API.get("https://jsonplaceholder.typicode.com/users");
-      set(() => ({ users:  response.data, loading: false }));
+      const response = await api.user.getUsers();
+      set(() => ({ users: response.data, loading: false }));
     } catch (err) {
       set(() => ({ hasErrors: true, loading: false }));
     }
