@@ -1,15 +1,16 @@
 import create from 'zustand'
 import api from '../services/api'
 
-export const authStore = create((set, get) => ({
+export const authStore = create((set) => ({
   user: {},
   logIn: () => {
-    console.log('usersStore', usersStore)
-    set({ user: { 
-      login: 'felipe', 
-      password: 'asdsadas', 
-      profile: usersStore.getState().users.find(it => it.id === 1)
-    } })
+    set({
+      user: {
+        login: 'felipe',
+        password: 'asdsadas',
+        profile: usersStore.getState().users.find(it => it.id === 1)
+      }
+    })
   },
   logOut: () => {
     set({ user: { login: null, password: null } })
@@ -21,9 +22,13 @@ export const usersStore = create((set, get) => ({
   loading: false,
   hasErrors: false,
   getUser: (user) => get().users.find(it => it.id === user.id),
-  addUser: (user) => { },
-  deleteUser: (id) => { },
-  updateUser: (user) => { },
+  addUser: (user) => set(() => ({ users: [...get().users, user] })),
+  deleteUser: (user) => set(() => ({ users: get().users.filter(it => it.id !== user.id) })),
+  updateUser: (user) => set(() => ({ users: get().users.map(it => 
+    (it.id === user.id) ? 
+    { id: "50", name: 'felipe updated' }
+    : it
+  )})),
   getUsers: async () => {
     set(() => ({ loading: true }));
     try {
@@ -34,3 +39,8 @@ export const usersStore = create((set, get) => ({
     }
   },
 }))
+
+const unsub3 = usersStore.subscribe(
+  (users, previousUsers) => console.log(users, previousUsers)
+)
+// const unsub2 = usersStore.subscribe((state) => state.users, console.log)
