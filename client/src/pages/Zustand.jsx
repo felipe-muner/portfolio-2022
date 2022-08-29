@@ -1,6 +1,4 @@
-import { useEffect } from 'react'
 import { usersStore, authStore } from '../store/store'
-import API from "../services/api";
 
 function AuthDashboard() {
   const { user, logIn, logOut } = authStore()
@@ -13,12 +11,13 @@ function AuthDashboard() {
 
 
 export default function Zustand() {
-  const { users, getUsers, loading } = usersStore()
+  const { users, getUsers, loading, getUser } = usersStore()
 
   return (
     <div>
       <AuthDashboard />
-      <button onClick={getUsers}> get users</button>
+      <button onClick={() => getUsers()}> get users</button>
+      <button onClick={() => getUser({ id: 3 })}> get user 0</button>
       {loading && 'loading...'}
       <div>{JSON.stringify(users)}</div>
     </div>

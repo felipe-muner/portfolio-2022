@@ -51,8 +51,6 @@ const RootQuery = new GraphQLObjectType({
     projects: {
       type: new GraphQLList(ProjectType),
       resolve(parent, args) {
-        console.log('new1', args)
-        console.log('new2', parent)
         return Project.find()
       }
     },

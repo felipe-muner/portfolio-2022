@@ -1,16 +1,29 @@
 import create from 'zustand'
 import api from '../services/api'
 
-export const authStore = create((set) => ({
+export const authStore = create((set, get) => ({
   user: {},
-  logIn: () => set({ user: {login: 'felipe'}}),
-  logOut: () => set({ user: { login: null, password: null } }),
+  logIn: () => {
+    console.log('usersStore', usersStore)
+    set({ user: { 
+      login: 'felipe', 
+      password: 'asdsadas', 
+      profile: usersStore.getState().users.find(it => it.id === 1)
+    } })
+  },
+  logOut: () => {
+    set({ user: { login: null, password: null } })
+  },
 }))
 
-export const usersStore = create((set) => ({
+export const usersStore = create((set, get) => ({
   users: [],
   loading: false,
   hasErrors: false,
+  getUser: (user) => get().users.find(it => it.id === user.id),
+  addUser: (user) => { },
+  deleteUser: (id) => { },
+  updateUser: (user) => { },
   getUsers: async () => {
     set(() => ({ loading: true }));
     try {
