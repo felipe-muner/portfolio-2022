@@ -2,13 +2,16 @@ import { usersStore, authStore } from '../store/store'
 
 function AuthDashboard() {
   const { user, logIn, logOut } = authStore()
+  const { testSetStateOutOfFunction } = usersStore()
   return <div>
+    {testSetStateOutOfFunction}
     <button onClick={logIn}>login</button>
     <button onClick={logOut}>logout</button>
     user: {JSON.stringify(user)}
   </div>
 }
 
+usersStore.setState(() => ({ testSetStateOutOfFunction: 2020 }))
 
 export default function Zustand() {
   const { users, getUsers, loading, getUser, addUser, deleteUser, updateUser } = usersStore()
