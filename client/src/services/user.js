@@ -1,7 +1,7 @@
-import axios from "axios";
+import axios from 'axios';
 
 const user = {
-  getUsers: () => axios.get("https://jsonplaceholder.typicode.com/users"),
+  getUsers: () => axios.get('https://jsonplaceholder.typicode.com/users'),
 
   // getById: async (payload: { id: string }) =>
   //   axios.get("/events/" + payload.id),

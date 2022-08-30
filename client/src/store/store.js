@@ -1,5 +1,5 @@
-import create from 'zustand'
-import api from '../services/api'
+import create from 'zustand';
+import api from '../services/api';
 
 export const authStore = create((set) => ({
   user: {},
@@ -8,28 +8,28 @@ export const authStore = create((set) => ({
       user: {
         login: 'felipe',
         password: 'asdsadas',
-        profile: usersStore.getState().users.find(it => it.id === 1)
-      }
-    })
+        profile: usersStore.getState().users.find((it) => it.id === 1),
+      },
+    });
   },
   logOut: () => {
-    set({ user: { login: null, password: null } })
+    set({ user: { login: null, password: null } });
   },
-}))
+}));
 
 export const usersStore = create((set, get) => ({
   users: [],
   loading: false,
   hasErrors: false,
-  getUser: (user) => get().users.find(it => it.id === user.id),
+  getUser: (user) => get().users.find((it) => it.id === user.id),
   addUser: (user) => set(() => ({ users: [...get().users, user] })),
-  removeAll: (user) => set(() => ({ users: [] })),
-  deleteUser: (user) => set(() => ({ users: get().users.filter(it => it.id !== user.id) })),
-  updateUser: (user) => set(() => ({ users: get().users.map(it => 
-    (it.id === user.id) ? 
-    { id: "50", name: 'felipe updated' }
-    : it
-  )})),
+  removeAll: () => set(() => ({ users: [] })),
+  deleteUser: (user) => set(() => ({ users: get().users.filter((it) => it.id !== user.id) })),
+  updateUser: (user) => set(() => ({
+    users: get().users.map((it) => ((it.id === user.id)
+      ? { id: '50', name: 'felipe updated' }
+      : it)),
+  })),
   getUsers: async () => {
     set(() => ({ loading: true }));
     try {
@@ -39,7 +39,7 @@ export const usersStore = create((set, get) => ({
       set(() => ({ hasErrors: true, loading: false }));
     }
   },
-}))
+}));
 
 // const unsub3 = usersStore.subscribe(
 //   (users, previousUsers) => console.log(users, previousUsers)

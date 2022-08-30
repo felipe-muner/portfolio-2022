@@ -1,9 +1,8 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Header from './components/Header';
 import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
+import Header from './components/Header';
 import Home from './pages/Home';
 import Project from './pages/Project';
-import InputAutofocus from './pages/InputAutofocus';
 import CounterContextPage from './pages/CounterContextPage';
 import Zustand from './pages/Zustand';
 import NotFound from './pages/NotFound';
@@ -34,23 +33,20 @@ const client = new ApolloClient({
 
 function App() {
   return (
-    <>
-      <ApolloProvider client={client}>
-        <Router>
-          <Header />
-          <div className='container'>
-            <Routes>
-              <Route path='/' element={<Home />} />
-              <Route path='/projects/:id' element={<Project />} />
-              <Route path='/input-autofocus' element={<InputAutofocus />} />
-              <Route path='/counter-context' element={<CounterContextPage />} />
-              <Route path='/zustand' element={<Zustand />} />
-              <Route path='*' element={<NotFound />} />
-            </Routes>
-          </div>
-        </Router>
-      </ApolloProvider>
-    </>
+    <ApolloProvider client={client}>
+      <Router>
+        <Header />
+        <div className="container">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/projects/:id" element={<Project />} />
+            <Route path="/counter-context" element={<CounterContextPage />} />
+            <Route path="/zustand" element={<Zustand />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </div>
+      </Router>
+    </ApolloProvider>
   );
 }
 

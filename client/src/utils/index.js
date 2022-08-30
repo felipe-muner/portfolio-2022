@@ -1,1 +1,1 @@
-export const normalizeAxios = (response) => response.data
+export const normalizeAxios = (response) => response.data;

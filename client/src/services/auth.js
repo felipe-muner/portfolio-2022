@@ -1,7 +1,7 @@
-import axios from "axios";
+import axios from 'axios';
 
 const auth = {
-  getUsers: () => axios.get("https://jsonplaceholder.typicode.com/users"),
-}
+  getUsers: () => axios.get('https://jsonplaceholder.typicode.com/users'),
+};
 
 export default auth;

@@ -1,26 +1,29 @@
-import { useState } from "react";
-import { useMutation } from "@apollo/client";
-import { GET_PROJECT } from "../queries/projectQueries";
-import { UPDATE_PROJECT } from "../mutations/projectMutations";
+import { useState } from 'react';
+import PropTypes from 'prop-types';
+import { useMutation } from '@apollo/client';
+import { GET_PROJECT } from '../queries/projectQueries';
+import { UPDATE_PROJECT } from '../mutations/projectMutations';
 
 export default function EditProjectForm({ project }) {
   const [name, setName] = useState(project.name);
   const [description, setDescription] = useState(project.description);
   const [status, setStatus] = useState(() => {
     switch (project.status) {
-      case "Not Started":
-        return "new";
-      case "In Progress":
-        return "progress";
-      case "Completed":
-        return "completed";
+      case 'Not Started':
+        return 'new';
+      case 'In Progress':
+        return 'progress';
+      case 'Completed':
+        return 'completed';
       default:
         throw new Error(`Unknown status: ${project.status}`);
     }
   });
 
   const [updateProject] = useMutation(UPDATE_PROJECT, {
-    variables: { id: project.id, name, description, status },
+    variables: {
+      id: project.id, name, description, status,
+    },
     refetchQueries: [{ query: GET_PROJECT, variables: { id: project.id } }],
   });
 
@@ -28,7 +31,7 @@ export default function EditProjectForm({ project }) {
     e.preventDefault();
 
     if (!name || !description || !status) {
-      return alert("Please fill out all fields");
+      return alert('Please fill out all fields');
     }
 
     updateProject(name, description, status);
@@ -55,7 +58,7 @@ export default function EditProjectForm({ project }) {
             id="description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-          ></textarea>
+          />
         </div>
         <div className="mb-3">
           <label className="form-label">Status</label>
@@ -77,4 +80,8 @@ export default function EditProjectForm({ project }) {
       </form>
     </div>
   );
+}
+
+EditProjectForm.propTypes = {
+  project: PropTypes.object.isRequired
 }

@@ -1,6 +1,6 @@
-import "./config"
-import auth from "./auth";
-import user from "./user";
+import './config';
+import auth from './auth';
+import user from './user';
 
 const api = {
   auth,

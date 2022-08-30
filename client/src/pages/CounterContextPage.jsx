@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import CounterContextChild from "../components/CounterContextChild";
-import CountContext from "../context/CountContext";
+import React, { useState } from 'react';
+import CounterContextChild from '../components/CounterContextChild';
+import CountContext from '../context/CountContext';
 
 export default function CounterContextPage() {
   const [count, setCount] = useState(0);

@@ -1,20 +1,26 @@
-import { usersStore, authStore } from '../store/store'
+import { usersStore, authStore } from '../store/store';
 
 function AuthDashboard() {
-  const { user, logIn, logOut } = authStore()
-  const { testSetStateOutOfFunction } = usersStore()
-  return <div>
-    {testSetStateOutOfFunction}
-    <button onClick={logIn}>login</button>
-    <button onClick={logOut}>logout</button>
-    user: {JSON.stringify(user)}
-  </div>
+  const { user, logIn, logOut } = authStore();
+  const { testSetStateOutOfFunction } = usersStore();
+  return (
+    <div>
+      {testSetStateOutOfFunction}
+      <button onClick={logIn}>login</button>
+      <button onClick={logOut}>logout</button>
+      user:
+      {' '}
+      {JSON.stringify(user)}
+    </div>
+  );
 }
 
-usersStore.setState(() => ({ testSetStateOutOfFunction: 2020 }))
+usersStore.setState(() => ({ testSetStateOutOfFunction: 2020 }));
 
 export default function Zustand() {
-  const { users, getUsers, loading, getUser, addUser, deleteUser, updateUser, removeAll } = usersStore()
+  const {
+    users, getUsers, loading, getUser, addUser, deleteUser, updateUser, removeAll,
+  } = usersStore();
 
   return (
     <div>
@@ -29,9 +35,9 @@ export default function Zustand() {
       {loading && <div>loading...</div>}
       <div>
         <ul>
-          {users.map(user => <li key={user.id}>{user.name}</li>)}
+          {users.map((user) => <li key={user.id}>{user.name}</li>)}
         </ul>
       </div>
     </div>
-  )
+  );
 }
