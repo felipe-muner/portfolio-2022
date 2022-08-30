@@ -13,7 +13,9 @@ export default function Project() {
   if (loading) return <Spinner />;
   if (error) return <p>Something Went Wrong</p>;
 
-  console.log(data)
+  if(!data.project.client){
+    return <div>there is no client associated with this project</div>
+  }
   return (
     <>
       {!loading && !error && (

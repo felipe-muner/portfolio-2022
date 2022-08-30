@@ -23,6 +23,7 @@ export const usersStore = create((set, get) => ({
   hasErrors: false,
   getUser: (user) => get().users.find(it => it.id === user.id),
   addUser: (user) => set(() => ({ users: [...get().users, user] })),
+  removeAll: (user) => set(() => ({ users: [] })),
   deleteUser: (user) => set(() => ({ users: get().users.filter(it => it.id !== user.id) })),
   updateUser: (user) => set(() => ({ users: get().users.map(it => 
     (it.id === user.id) ? 
@@ -40,7 +41,7 @@ export const usersStore = create((set, get) => ({
   },
 }))
 
-const unsub3 = usersStore.subscribe(
-  (users, previousUsers) => console.log(users, previousUsers)
-)
+// const unsub3 = usersStore.subscribe(
+//   (users, previousUsers) => console.log(users, previousUsers)
+// )
 // const unsub2 = usersStore.subscribe((state) => state.users, console.log)
